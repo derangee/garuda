@@ -64,7 +64,7 @@ const ChooseResume = () => {
                 title={resume.title}
                 description={resume.description}
                 type={resume.type}
-                comp={resume.comp} // Pass the EvervaultCard component wrapped in Link
+                comp={resume.comp}
               />
             ))}
           </div>
