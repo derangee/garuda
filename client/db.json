@@ -1,0 +1,94 @@
+{
+    "profiles": [
+      {
+        "userId": "uid-1234567890",
+        "username": "john_doe",
+        "password": "hashed_password_123",
+        "personalInfo": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john.doe@example.com",
+          "phone": "+1234567890",
+          "dateOfBirth": "1995-06-15T00:00:00.000Z",
+          "address": {
+            "street": "123 Main St",
+            "city": "New York",
+            "state": "NY",
+            "country": "USA",
+            "zipCode": "10001"
+          },
+          "resume": "https://example.com/resume.pdf"
+        },
+        "academic": [
+          {
+            "institution": "XYZ University",
+            "degree": "Bachelor of Science",
+            "fieldOfStudy": "Computer Science",
+            "startDate": "2013-09-01T00:00:00.000Z",
+            "endDate": "2017-06-01T00:00:00.000Z",
+            "description": "Studied various aspects of computer science, including algorithms, data structures, and software development.",
+            "grade": "3.8 GPA"
+          }
+        ],
+        "projects": [
+          {
+            "title": "Lost & Found System",
+            "description": "A web application for reporting and tracking lost and found items.",
+            "startDate": "2024-01-01T00:00:00.000Z",
+            "endDate": "2024-03-01T00:00:00.000Z",
+            "technologiesUsed": ["React", "Node.js", "MongoDB"],
+            "projectLink": "https://github.com/johndoe/lost-found",
+            "isOpenSource": true
+          }
+        ],
+        "skills": ["JavaScript", "React", "Node.js", "MongoDB", "Docker"],
+        "workEx": [
+          {
+            "company": "TechCorp",
+            "position": "Software Engineer",
+            "startDate": "2019-07-01T00:00:00.000Z",
+            "endDate": "2023-06-30T00:00:00.000Z",
+            "description": "Worked on full-stack web applications, building scalable solutions.",
+            "isCurrent": false
+          }
+        ],
+        "certifications": [
+          {
+            "name": "AWS Certified Developer",
+            "issuingOrganization": "Amazon Web Services",
+            "issueDate": "2022-05-01T00:00:00.000Z",
+            "expirationDate": "2025-05-01T00:00:00.000Z",
+            "credentialId": "AWS123456",
+            "credentialURL": "https://aws.com/cert/AWS123456"
+          }
+        ],
+        "achievements": [
+          {
+            "title": "Hackathon Winner",
+            "description": "Won first place in a national-level hackathon for building an AI chatbot.",
+            "date": "2023-11-01T00:00:00.000Z",
+            "issuer": "Hackathon Organization"
+          }
+        ],
+        "publications": [
+          {
+            "title": "Efficient Web Scraping Techniques",
+            "publisher": "Tech Journal",
+            "publicationDate": "2023-07-01T00:00:00.000Z",
+            "description": "A research paper on modern web scraping methods and best practices.",
+            "link": "https://example.com/publication"
+          }
+        ],
+        "socials": {
+          "linkedIn": "https://linkedin.com/in/johndoe",
+          "github": "https://github.com/johndoe",
+          "twitter": "https://twitter.com/johndoe",
+          "website": "https://johndoe.dev",
+          "medium": "https://medium.com/@johndoe",
+          "stackOverflow": "https://stackoverflow.com/users/123456/johndoe",
+          "leetcode": "https://leetcode.com/johndoe"
+        }
+      }
+    ]
+  }
+  
