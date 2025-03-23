@@ -55,7 +55,7 @@ const Topbar = () => {
             <Link to="/resources">Resources</Link>
           </TabsTrigger>
           <TabsTrigger value="Interview Prep">
-            <Link to="/interview-prep">Interview Prep</Link>
+            <Link to="/mock-interview">Mock Interview</Link>
           </TabsTrigger>
         </TabsList>
       </Tabs>

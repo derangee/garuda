@@ -10,6 +10,8 @@ import ResumeDev from './pages/ResumeDev';
 import ResumeResearch from './pages/ResumeResearch'
 import ChooseResume from './pages/ChooseResume';
 import ProtectedRoute from './components/ProtectedRoute';
+import MockInterview from './pages/mockInterview';
+
 
 // Resume type components
 const DeveloperResume = () => <ResumeDev resumeType="developer" />;
@@ -61,6 +63,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <ResumeResearch />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/mock-interview"
+            element={
+              <ProtectedRoute>
+                <MockInterview />
               </ProtectedRoute>
             }
           />
