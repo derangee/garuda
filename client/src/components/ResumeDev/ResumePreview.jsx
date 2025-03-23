@@ -229,244 +229,247 @@ ${educationEntries}
     setIsGeneratingPdf(true);
     try {
       const doc = new jsPDF();
-      
+
       // Add content to PDF
       // Personal Info
       doc.setFontSize(18);
-      doc.text(`${data.personalInfo?.firstName || ''} ${data.personalInfo?.lastName || ''}`.trim(), 105, 20, { align: 'center' });
-      
+      doc.text(
+        `${data.personalInfo?.firstName || ""} ${
+          data.personalInfo?.lastName || ""
+        }`.trim(),
+        105,
+        20,
+        { align: "center" }
+      );
+
       doc.setFontSize(10);
       let contactLine = [];
       if (data.personalInfo?.email) contactLine.push(data.personalInfo.email);
       if (data.personalInfo?.phone) contactLine.push(data.personalInfo.phone);
       if (data.personalInfo?.address?.city && data.personalInfo?.address?.state) {
-        contactLine.push(`${data.personalInfo.address.city}, ${data.personalInfo.address.state}`);
+        contactLine.push(
+          `${data.personalInfo.address.city}, ${data.personalInfo.address.state}`
+        );
       }
-      doc.text(contactLine.join(' | '), 105, 30, { align: 'center' });
-      
-      // Socials
-      let socialsLine = [];
-      if (data.socials?.linkedIn) socialsLine.push(`LinkedIn: ${data.socials.linkedIn}`);
-      if (data.socials?.github) socialsLine.push(`GitHub: ${data.socials.github}`);
-      if (data.socials?.website) socialsLine.push(`Website: ${data.socials.website}`);
-      
-      if (socialsLine.length > 0) {
-        doc.text(socialsLine.join(' | '), 105, 35, { align: 'center' });
-      }
-      
+      doc.text(contactLine.join(" | "), 105, 30, { align: "center" });
+
       let yPosition = 45;
-      
+
       // Education
       if (data.academic && data.academic.length > 0) {
-        doc.setDrawColor(70, 108, 247);
-        doc.setLineWidth(0.5);
-        doc.line(20, yPosition - 3, 190, yPosition - 3);
-        
         doc.setFontSize(14);
         doc.setTextColor(43, 58, 103);
         doc.text("Education", 20, yPosition);
         yPosition += 8;
-        
-        data.academic.forEach(edu => {
+
+        data.academic.forEach((edu) => {
           doc.setFontSize(12);
           doc.setTextColor(43, 58, 103);
           doc.text(`${edu.degree} in ${edu.fieldOfStudy}`, 20, yPosition);
           yPosition += 5;
-          
+
           doc.setFontSize(10);
           doc.setTextColor(100, 116, 139);
-          doc.text(`${edu.institution} | ${formatDate(edu.startDate)} - ${formatDate(edu.endDate)}`, 20, yPosition);
+          doc.text(
+            `${edu.institution} | ${formatDate(edu.startDate)} - ${formatDate(
+              edu.endDate
+            )}`,
+            20,
+            yPosition
+          );
           yPosition += 5;
-          
+
           if (edu.grade) {
             doc.text(`Grade: ${edu.grade}`, 20, yPosition);
             yPosition += 5;
           }
-          
+
           if (edu.description) {
             doc.setTextColor(51, 65, 85);
             const descLines = doc.splitTextToSize(edu.description, 170);
             doc.text(descLines, 20, yPosition);
-            yPosition += (descLines.length * 5);
+            yPosition += descLines.length * 5;
           }
-          
+
           yPosition += 5;
         });
       }
-      
+
       // Work Experience
       if (data.workEx && data.workEx.length > 0) {
-        doc.setDrawColor(70, 108, 247);
-        doc.setLineWidth(0.5);
-        doc.line(20, yPosition - 3, 190, yPosition - 3);
-        
         doc.setFontSize(14);
         doc.setTextColor(43, 58, 103);
         doc.text("Work Experience", 20, yPosition);
         yPosition += 8;
-        
-        data.workEx.forEach(exp => {
+
+        data.workEx.forEach((exp) => {
           doc.setFontSize(12);
           doc.setTextColor(43, 58, 103);
           doc.text(`${exp.position} | ${exp.company}`, 20, yPosition);
           yPosition += 5;
-          
+
           doc.setFontSize(10);
           doc.setTextColor(100, 116, 139);
-          doc.text(`${formatDate(exp.startDate)} - ${exp.isCurrent ? 'Present' : formatDate(exp.endDate)}`, 20, yPosition);
+          doc.text(
+            `${formatDate(exp.startDate)} - ${
+              exp.isCurrent ? "Present" : formatDate(exp.endDate)
+            }`,
+            20,
+            yPosition
+          );
           yPosition += 5;
-          
+
           if (exp.description) {
             doc.setTextColor(51, 65, 85);
             const descLines = doc.splitTextToSize(exp.description, 170);
             doc.text(descLines, 20, yPosition);
-            yPosition += (descLines.length * 5);
+            yPosition += descLines.length * 5;
           }
-          
+
           yPosition += 5;
         });
       }
-      
+
       // Projects
       if (data.projects && data.projects.length > 0) {
-        doc.setDrawColor(70, 108, 247);
-        doc.setLineWidth(0.5);
-        doc.line(20, yPosition - 3, 190, yPosition - 3);
-        
         doc.setFontSize(14);
         doc.setTextColor(43, 58, 103);
         doc.text("Projects", 20, yPosition);
         yPosition += 8;
-        
-        data.projects.forEach(project => {
+
+        data.projects.forEach((project) => {
           doc.setFontSize(12);
           doc.setTextColor(43, 58, 103);
           doc.text(project.title, 20, yPosition);
           yPosition += 5;
-          
+
           if (project.startDate || project.endDate) {
             doc.setFontSize(10);
             doc.setTextColor(100, 116, 139);
-            doc.text(`${formatDate(project.startDate)} - ${formatDate(project.endDate)}`, 20, yPosition);
+            doc.text(
+              `${formatDate(project.startDate)} - ${formatDate(
+                project.endDate
+              )}`,
+              20,
+              yPosition
+            );
             yPosition += 5;
           }
-          
+
           if (project.description) {
             doc.setTextColor(51, 65, 85);
             const descLines = doc.splitTextToSize(project.description, 170);
             doc.text(descLines, 20, yPosition);
-            yPosition += (descLines.length * 5);
+            yPosition += descLines.length * 5;
           }
-          
+
           if (project.technologiesUsed && project.technologiesUsed.length > 0) {
             doc.setTextColor(100, 116, 139);
-            const techText = `Technologies: ${project.technologiesUsed.join(", ")}`;
+            const techText = `Technologies: ${project.technologiesUsed.join(
+              ", "
+            )}`;
             const techLines = doc.splitTextToSize(techText, 170);
             doc.text(techLines, 20, yPosition);
-            yPosition += (techLines.length * 5);
+            yPosition += techLines.length * 5;
           }
-          
+
           if (project.projectLink) {
             doc.setTextColor(70, 108, 247);
             doc.text(`Project Link: ${project.projectLink}`, 20, yPosition);
             yPosition += 5;
           }
-          
+
           yPosition += 5;
         });
       }
-      
+
       // Skills
       if (data.skills && data.skills.length > 0) {
-        doc.setDrawColor(70, 108, 247);
-        doc.setLineWidth(0.5);
-        doc.line(20, yPosition - 3, 190, yPosition - 3);
-        
         doc.setFontSize(14);
         doc.setTextColor(43, 58, 103);
         doc.text("Skills", 20, yPosition);
         yPosition += 8;
-        
+
         doc.setFontSize(10);
         doc.setTextColor(51, 65, 85);
-        
+
         const skillsList = data.skills.join(" • ");
         const skillsLines = doc.splitTextToSize(skillsList, 170);
         doc.text(skillsLines, 20, yPosition);
-        yPosition += (skillsLines.length * 5) + 5;
+        yPosition += skillsLines.length * 5 + 5;
       }
-      
+
       // Certifications
       if (data.certifications && data.certifications.length > 0) {
-        doc.setDrawColor(70, 108, 247);
-        doc.setLineWidth(0.5);
-        doc.line(20, yPosition - 3, 190, yPosition - 3);
-        
         doc.setFontSize(14);
         doc.setTextColor(43, 58, 103);
         doc.text("Certifications", 20, yPosition);
         yPosition += 8;
-        
-        data.certifications.forEach(cert => {
+
+        data.certifications.forEach((cert) => {
           doc.setFontSize(12);
           doc.setTextColor(43, 58, 103);
           doc.text(cert.name, 20, yPosition);
           yPosition += 5;
-          
+
           doc.setFontSize(10);
           doc.setTextColor(100, 116, 139);
-          doc.text(`${cert.issuingOrganization} | ${formatDate(cert.issueDate)}`, 20, yPosition);
+          doc.text(
+            `${cert.issuingOrganization} | ${formatDate(cert.issueDate)}`,
+            20,
+            yPosition
+          );
           yPosition += 5;
-          
+
           if (cert.credentialURL) {
             doc.setTextColor(70, 108, 247);
             doc.text(`Credential: ${cert.credentialURL}`, 20, yPosition);
             yPosition += 5;
           }
-          
+
           yPosition += 3;
         });
       }
-      
+
       // Achievements
       if (data.achievements && data.achievements.length > 0) {
-        doc.setDrawColor(70, 108, 247);
-        doc.setLineWidth(0.5);
-        doc.line(20, yPosition - 3, 190, yPosition - 3);
-        
         doc.setFontSize(14);
         doc.setTextColor(43, 58, 103);
         doc.text("Achievements", 20, yPosition);
         yPosition += 8;
-        
-        data.achievements.forEach(achievement => {
+
+        data.achievements.forEach((achievement) => {
           doc.setFontSize(12);
           doc.setTextColor(43, 58, 103);
           doc.text(achievement.title, 20, yPosition);
           yPosition += 5;
-          
+
           doc.setFontSize(10);
           doc.setTextColor(100, 116, 139);
-          doc.text(`${achievement.issuer} | ${formatDate(achievement.date)}`, 20, yPosition);
+          doc.text(
+            `${achievement.issuer} | ${formatDate(achievement.date)}`,
+            20,
+            yPosition
+          );
           yPosition += 5;
-          
+
           if (achievement.description) {
             doc.setTextColor(51, 65, 85);
             const descLines = doc.splitTextToSize(achievement.description, 170);
             doc.text(descLines, 20, yPosition);
-            yPosition += (descLines.length * 5);
+            yPosition += descLines.length * 5;
           }
-          
+
           yPosition += 3;
         });
       }
-      
+
       // Generate blob and create URL
-      const pdfBlob = doc.output('blob');
+      const pdfBlob = doc.output("blob");
       const url = URL.createObjectURL(pdfBlob);
       setPdfUrl(url);
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      console.error("Error generating PDF:", error);
     } finally {
       setIsGeneratingPdf(false);
     }
